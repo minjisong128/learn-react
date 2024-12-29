@@ -1,4 +1,19 @@
-export default function CourseItem({ title, description, thumbnail }) {
+function HeartIconBtn({ isFavorite = false }) {
+  if (isFavorite === true) {
+    return (
+      <button className="btn">
+        <img className="icon-heart" src="/img/heart-fill-icon.svg" />
+      </button>
+    )
+  }
+  return (
+    <button className="btn">
+      <img className="icon-heart" src="/img/heart-icon.svg" />
+    </button>
+  )
+}
+
+export default function CourseItem({ title, description, thumbnail, isFavorite }) {
 
   return (
     <article className="course">
@@ -6,6 +21,9 @@ export default function CourseItem({ title, description, thumbnail }) {
       <div className="course__body">
         <div className="course__title">{title}</div>
         <div className="course__description">{description}</div>
+      </div>
+      <div className="course__icons">
+        <HeartIconBtn isFavorite={isFavorite} />
       </div>
     </article>
   );
