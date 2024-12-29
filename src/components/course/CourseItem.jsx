@@ -2,12 +2,12 @@ function HeartIconBtn({ isFavorite = false }) {
 
   return (
     <button className="btn">
-      <img className="icon-heart" src={isFavorite ? '/img/heart-fill-icon.svg' : '/img/heart-icon.svg'} />
+      <img className="btn__img" src={isFavorite ? '/img/heart-fill-icon.svg' : '/img/heart-icon.svg'} />
     </button>
   )
 }
 
-export default function CourseItem({ title, description, thumbnail, isFavorite }) {
+export default function CourseItem({ title, description, thumbnail, isFavorite, link }) {
 
   return (
     <article className="course">
@@ -18,6 +18,11 @@ export default function CourseItem({ title, description, thumbnail, isFavorite }
       </div>
       <div className="course__icons">
         <HeartIconBtn isFavorite={isFavorite} />
+        {link && (
+          <a className="btn" href={link} target="_blank" rel="noreferrer">
+            <img className="btn__img" src="/img/link-icon.svg" alt="" />
+          </a>
+        )}
       </div>
     </article>
   );

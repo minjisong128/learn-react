@@ -15,12 +15,14 @@ export default function App() {
       description: '쉽고! 알찬! 내용을 준비했습니다.',
       thumbnail: '/img/js.png',
       isFavorite: false,
+      link: 'https://inf.run/Kpnd'
     },
     {
       title: '포트폴리오 사이트 만들고 배포까지!',
       description: '포트폴리오 사이트를 만들고 배포해 보세요.',
       thumbnail: '/img/portfolio.png',
       isFavorite: true,
+      link: 'https://inf.run/YkAN'
     }
   ];
 
