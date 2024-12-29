@@ -10,7 +10,7 @@ export default function App() {
       description: '웹 개발에 필요한 기본 지식을 배웁니다.',
       thumbnail: '/img/htmlcss.png',
       isFavorite: true,
-      link: 'https://inf.run/JxyyT'
+      link: 'https://inf.run/YkAN'
     },
     {
       id: 1, // map() 호출 내부의 JSX 엘리먼트에는 항상 key가 필요
@@ -26,7 +26,7 @@ export default function App() {
       description: '포트폴리오 사이트를 만들고 배포해 보세요.',
       thumbnail: '/img/portfolio.png',
       isFavorite: true,
-      link: 'https://inf.run/YkAN'
+      link: 'https://inf.run/JxyyT'
     }
   ];
 
