@@ -2,11 +2,7 @@ function HeartIconBtn({ isFavorite = false }) {
 
   return (
     <button className="btn">
-      {isFavorite ? (
-        <img className="icon-heart" src="/img/heart-fill-icon.svg" />
-      ) : (
-        <img className="icon-heart" src="/img/heart-icon.svg" />
-      )}
+      <img className="icon-heart" src={isFavorite ? '/img/heart-fill-icon.svg' : '/img/heart-icon.svg'} />
     </button>
   )
 }
