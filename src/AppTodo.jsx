@@ -59,6 +59,16 @@ function AppTodo(props) {
     setTodos(nextTodos);
   }
 
+  const handleReverse = () => {
+    // 1. reverse() 활용 : 원본 배열 변경하는 mutable API
+    // const nextTodos = [...todos];
+    // nextTodos.reverse();
+    // setTodos(nextTodos);
+
+    // 2. toReversed() 활용 : 원본 배열 변경하지 않는 immutable API
+    setTodos(todos.toReversed());
+  }
+
   return (
     <div>
       <h2>할일목록</h2>
@@ -79,6 +89,7 @@ function AppTodo(props) {
         <button onClick={handleAddTodoByIndex}>{insertAt}번째 추가</button>
       </div>
       <div>Preview: {todoText}</div>
+      <button onClick={handleReverse}>Reverse</button>
       <TodoList
         todos={todos}
         onDeleteTodo={handleDeleteTodo}
