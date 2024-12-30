@@ -13,7 +13,9 @@ export default function Counter({ onTotal }) {
 
   const handleCounter = () => {
     setCounter(counter + 1);
-    onTotal(); // total 값 1씩 증가시킴
+    if (onTotal) {
+      onTotal(); // total 값 1씩 증가시킴
+    }
   }
 
   return (
