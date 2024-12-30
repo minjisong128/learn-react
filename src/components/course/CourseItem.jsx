@@ -15,11 +15,11 @@ function LinkIconBtn({ link }) {
   )
 }
 
-export default function CourseItem({ title, description, thumbnail, isFavorite, link }) {
+export default function CourseItem({ onFavorite, id, title, description, thumbnail, isFavorite, link }) {
 
   function handleFavorite(e) {
     e.stopPropagation(); // 이벤트 전파(버블링) 멈춤
-    alert(isFavorite ? '좋아요' : '모르겠어요');
+    onFavorite(id, !isFavorite);
   }
 
   function handleItemClick() {

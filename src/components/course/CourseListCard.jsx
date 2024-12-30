@@ -2,7 +2,7 @@ import { Fragment } from 'react'; // React에서는 여러 개의 DOM 노드를 
 import Card from '../Card';
 import CourseItem from './CourseItem'
 
-function CourseListCard({ title, items }) {
+function CourseListCard({ onFavorite, title, items }) {
 
   const lastIndex = items.length - 1;
 
@@ -13,7 +13,7 @@ function CourseListCard({ title, items }) {
           {items.map((item, index) => (
             // 리스트 안에서 자식 컴포넌트 렌더링할 때는 key가 필요
             <Fragment key={item.id}>
-              <CourseItem {...item} />
+              <CourseItem {...item} onFavorite={onFavorite} />
               {/* 마지막 항목에 대해서는 구분선 없애기 위한 조건부 렌더링 */}
               {index !== lastIndex && <hr className="divider" />}
             </Fragment>
