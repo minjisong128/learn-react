@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useImmer } from "use-immer";
 import Card from "../Card";
 
 export default function CourseForm() {
 
-  const [form, setForm] = useState({
+  const [form, updateForm] = useImmer({
     title: '리액트 강의',
     description: '리액트 기초부터 실전까지!',
     info: {
@@ -16,31 +16,23 @@ export default function CourseForm() {
     e.preventDefault(); // 기본 동작 막음
   }
 
+  // Immer는 내부적으로 draft의 어느 부분이 변경되었는지 알아내어,
+  // 변경사항을 포함한 완전히 새로운 객체를 생성
   const handleChange = (e) => {
-    console.log('e.target.name: ', e.target.name);
-    setForm({
-      ...form, // 전개 구문 통해 [e.target.name](e.g. title) 외 기존 속성(e.g. description) 유지
-      [e.target.name]: e.target.value // [e.target.name] : title or description이 동적으로 할당됨
+    updateForm((draft) => { // draft : 우리가 설정한 객체
+      draft[e.target.name] = e.target.value
     })
   }
 
   const handleSkillChange = (e) => {
-    setForm({
-      ...form,
-      info: {
-        ...form.info,
-        skill: e.target.value
-      }
+    updateForm((draft) => {
+      draft.info.skill = e.target.value
     })
   }
 
   const handleLevelChange = (e) => {
-    setForm({
-      ...form,
-      info: {
-        ...form.info,
-        level: e.target.value
-      }
+    updateForm((draft) => {
+      draft.info.level = e.target.value
     })
   }
 
