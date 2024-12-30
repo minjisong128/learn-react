@@ -15,10 +15,10 @@ export default function Counter({ onTotal }) {
 
   const handleCounter = () => {
     // 이벤트 핸들러는 렌더링 당시의 state를 사용 (state는 스냅샷처럼 동작)
-    // 아래에서 세 개의 counter에는 렌더링 당시의 state 값이 동일하게 들어감. 따라서 setCounter(counter + 1); 하나만 있을 때와 동일하게 동작할 것.
-    setCounter(counter + 1);
-    setCounter(counter + 1);
-    setCounter(counter + 1);
+    // 하나의 이벤트에서 여러 번 동일한 state 변경 희망 시 콜백 함수 넣어주면 됨
+    setCounter((prevCounter) => prevCounter + 1);
+    setCounter((prevCounter) => prevCounter + 1);
+    setCounter((prevCounter) => prevCounter + 1);
     console.log('[함수호출] Counter: ', counter);
 
     if (onTotal) {
