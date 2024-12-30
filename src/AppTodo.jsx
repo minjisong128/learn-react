@@ -44,8 +44,9 @@ function AppTodo(props) {
   }
 
   // 텍스트 입력 후 Enter 키 눌렀을 때에도 추가 버튼 눌렀을 때와 동일하게 항목 추가
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
+  const handleAddTodoOnEnter = (e) => {
+    // 조합중일 때(e.nativeEvent.isComposing가 true일 때) 추가 버튼 클릭 시 두 개 추가되는 문제 해결
+    if (e.key === 'Enter' && e.nativeEvent.isComposing === false) {
       handleAddTodo();
     }
   }
@@ -69,7 +70,7 @@ function AppTodo(props) {
           type="text"
           value={todoText}
           onChange={handleTodoTextChange}
-          onKeyDown={handleKeyDown} />
+          onKeyDown={handleAddTodoOnEnter} />
         <button onClick={handleAddTodo}>추가</button>
       </div>
       <div>
