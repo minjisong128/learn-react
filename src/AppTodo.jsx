@@ -1,43 +1,45 @@
-import { useState } from 'react';
+import { useReducer, useState } from 'react';
 import './App.css';
 import TodoList from './components/todo/TodoList'
+import todoReducer from './reducer/todo-reducer';
 
 function AppTodo(props) {
   const [todoText, setTodoText] = useState('');
-  const [todos, setTodos] = useState([
+  const [todos, dispatch] = useReducer(todoReducer, [
     { id: 0, text: 'HTML&CSS 공부하기', done: false },
     { id: 1, text: '자바스크립트 공부하기', done: false }
-  ])
+  ]);
+
   const [insertAt, setInsertAt] = useState(todos.length - 1);
 
   const handleTodoTextChange = (e) => {
     setTodoText(e.target.value);
   }
 
+  //1] added
   const handleAddTodo= () => {
-    const nextId = todos.length;
-    // cf) todos.push({ id: nextId, text: '' }) 와 같이 작성 시 추가 안 됨
-    setTodos([
-      ...todos,
-      { id: nextId, text: todoText, done: false }
-    ]);
+    dispatch({ // reducer(todo-reducer.js)에 dispatch 함수로 action 객체 넘김
+      type: 'added',
+      nextId: todos.length,
+      todoText
+    });
     setTodoText(''); // 추가 버튼 클릭 후 텍스트 초기화 위한 코드 cf) 빈 문자열 말고 null이나 undefined로 작성 시 동작 안 함
   }
 
+  //2] added_index
   const handleAddTodoByIndex = () => {
-    const nextId = todos.length;
-    const newTodos = [
-      ...todos.slice(0, insertAt), // 삽입 지점 이전 항목
-      { id: nextId, text: todoText, done: false },
-      ...todos.slice(insertAt) // 삽입 지점 이후 항목
-    ];
-    setTodos(newTodos);
+    dispatch({
+      type: 'added_index',
+      insertAt,
+      nextId: todos.length,
+      todoText
+    });
     setTodoText('');
   }
 
+  //3] deleted
   const handleDeleteTodo = (deleteId) => {
-    const newTodos = todos.filter(item => item.id !== deleteId);
-    setTodos(newTodos);
+    dispatch({ type: 'deleted', deleteId });
   }
 
   // 텍스트 입력 후 Enter 키 눌렀을 때에도 추가 버튼 눌렀을 때와 동일하게 항목 추가
@@ -47,26 +49,15 @@ function AppTodo(props) {
     }
   }
 
+  //4] done (완료 처리)
   // checkbox 클릭 시 상태 변경
   const handleToggleTodo = (id, done) => {
-    // 기존 배열 안의 객체 속성을 변경
-    const nextTodos = todos.map(item => {
-      if (item.id === id) {
-        return { ...item, done }; // return { ...item, done: done };을 간략히 작성
-      }
-      return item;
-    })
-    setTodos(nextTodos);
+    dispatch({ type: 'done', id, done });
   }
 
+  //5] reverse
   const handleReverse = () => {
-    // 1. reverse() 활용 : 원본 배열 변경하는 mutable API
-    // const nextTodos = [...todos];
-    // nextTodos.reverse();
-    // setTodos(nextTodos);
-
-    // 2. toReversed() 활용 : 원본 배열 변경하지 않는 immutable API
-    setTodos(todos.toReversed());
+    dispatch({ type: 'reverse' })
   }
 
   return (
