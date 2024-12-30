@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useImmer } from 'use-immer';
 import './AppCourse.css'
 import CourseForm from './components/course/CourseForm';
 import CourseListCard from './components/course/CourseListCard'
 
 export default function App() {
 
-  const [items, setItems] = useState([
+  const [items, updateItems] = useImmer([
     {
       id: 0, // map() 호출 내부의 JSX 엘리먼트에는 항상 key가 필요
       title: '입문자를 위한, HTML&CSS 웹 개발 입문',
@@ -33,16 +33,10 @@ export default function App() {
   ]);
 
   const handleFavoriteChange = (id, isFavorite) => {
-    const newItems = items.map(item => {
-      if (item.id === id) {
-        return {
-          ...item,
-          isFavorite
-        };
-      }
-      return item;
-    })
-    setItems(newItems);
+    updateItems(draft => {
+      const targetItem = draft.find(item => item.id === id);
+      targetItem.isFavorite = isFavorite;
+    });
   }
 
   const favoriteItems = items.filter(item => item.isFavorite);
