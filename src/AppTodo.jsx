@@ -22,13 +22,22 @@ function AppTodo(props) {
     ]);
     setTodoText(''); // 추가 버튼 클릭 후 텍스트 초기화 위한 코드 cf) 빈 문자열 말고 null이나 undefined로 작성 시 동작 안 함
   }
+
+  const handleDeleteTodo = (deleteId) => {
+    const newTodos = todos.filter(item => item.id !== deleteId);
+    setTodos(newTodos);
+  }
+
   return (
     <div>
       <h2>할일목록</h2>
       <input type="text" value={todoText} onChange={handleTodoTextChange} />
       <button onClick={handleAddTodo}>추가</button>
       <div>Preview: {todoText}</div>
-      <TodoList todos={todos} />
+      <TodoList
+        todos={todos}
+        onDeleteTodo={handleDeleteTodo}
+      />
     </div>
   );
 }
