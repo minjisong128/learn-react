@@ -1,4 +1,9 @@
-export default function Footer({ darkMode }) {
+import { useContext } from "react";
+import { DarkModeContext } from "../../context/DarkModeContext";
+
+export default function Footer() {
+
+  const { darkMode } = useContext(DarkModeContext);
 
   return (
     <footer className={`footer ${darkMode ? 'footer--dark' : 'footer--light'}`}>

@@ -1,4 +1,10 @@
-export default function Card({ darkMode, title, children }) {
+import { useContext } from "react";
+import { DarkModeContext } from "../context/DarkModeContext";
+
+export default function Card({ title, children }) {
+
+  const { darkMode } = useContext(DarkModeContext);
+
   return (
     <div>
       <div className={`card ${darkMode ? 'card--dark' : 'card--light'}`}>

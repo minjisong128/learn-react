@@ -1,4 +1,9 @@
-export default function Header({ darkMode, toggleDarkMode }) {
+import { useContext } from "react";
+import { DarkModeContext } from "../../context/DarkModeContext";
+
+export default function Header() {
+
+  const {darkMode, toggleDarkMode} = useContext(DarkModeContext); // DarkModeContext에서는 객체 타입으로 받아야 함
 
   return (
     // header--dark
