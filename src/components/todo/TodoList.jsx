@@ -1,14 +1,14 @@
 import TodoItem from "./TodoItem";
+import { useTodos } from "../../context/TodoContext";
 
-function TodoList({ onToggleTodo, onDeleteTodo, todos = [] }) {
+function TodoList() {
+  const todos = useTodos();
   return (
     <ul>
       {todos.map(item => (
         <li key={item.id}>
           <TodoItem
             item={item}
-            onToggleTodo={onToggleTodo}
-            onDeleteTodo={onDeleteTodo}
           />
         </li>
       ))}
